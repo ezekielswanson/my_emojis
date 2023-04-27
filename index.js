@@ -1,45 +1,43 @@
-const myEmojis = ["👨‍💻", "⛷", "🍲"]
-const emojiContainer = document.getElementById("emoji-container")
-const emojiInput = document.getElementById("emoji-input")
-const pushBtn = document.getElementById("push-btn")
-const unshiftBtn = document.getElementById("unshift-btn")
-const popBtn = document.getElementById("pop-btn")
-const shiftBtn = document.getElementById("shift-btn")
+const emojis = ["👨‍💻", "⛷", "🍲"];
+const emojiContainer = document.getElementById("emoji-container");
+const emojiInput = document.getElementById("emoji-input");
+const pushButton = document.getElementById("push-btn");
+const unshiftButton = document.getElementById("unshift-btn");
+const popButton = document.getElementById("pop-btn");
+const shiftButton = document.getElementById("shift-btn");
 
 function renderEmojis() {
-    emojiContainer.innerHTML = ""
-    for (let i = 0; i < myEmojis.length; i++) {
-        const emoji = document.createElement('span')
-        emoji.textContent = myEmojis[i]
-        emojiContainer.append(emoji)
+    emojiContainer.innerHTML = "";
+    for (let i = 0; i < emojis.length; i++) {
+        const emojiElement = document.createElement('span');
+        emojiElement.textContent = emojis[i];
+        emojiContainer.append(emojiElement);
     }
 }
 
-renderEmojis()
-
-pushBtn.addEventListener("click", function(){
+function addEmoji(operation) {
     if (emojiInput.value) {
-        myEmojis.push(emojiInput.value)
-        emojiInput.value = ""
-        renderEmojis()
+        emojis[operation](emojiInput.value);
+        emojiInput.value = "";
+        renderEmojis();
     }
-})
+}
 
-unshiftBtn.addEventListener("click", function(){
-    if (emojiInput.value) {
-        myEmojis.unshift(emojiInput.value)
-        emojiInput.value = ""
-        renderEmojis()
-    }
-})
+renderEmojis();
 
-popBtn.addEventListener("click", function() {
-    myEmojis.pop()
-    renderEmojis()
-})
+pushButton.addEventListener("click", function() {
+    addEmoji("push");
+});
 
-shiftBtn.addEventListener("click", function() {
-    myEmojis.shift()
-    renderEmojis()
-})
 
+unshiftButton.addEventListener("click", function() {
+    addEmoji("unshift");
+});
+popButton.addEventListener("click", function() {
+    emojis.pop();
+    renderEmojis();
+});
+shiftButton.addEventListener("click", function() {
+    emojis.shift();
+    renderEmojis();
+});
